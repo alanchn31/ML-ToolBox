@@ -8,6 +8,7 @@ def generate_stats_features(df: pd.DataFrame, feature_cols: List[str],
     """
     Generates date and time features from a datetime column in a dataframe
 
+    Args:
     - df: Input Dataframe
     - feature_cols: name(s) of numerical column(s) to generate features from
     - new features' label_prefixes (default: feat)
@@ -25,7 +26,7 @@ def generate_stats_features(df: pd.DataFrame, feature_cols: List[str],
     # peak-to-peak (max - min):
     df[f'{label_prefix}_ptp'] = np.ptp(df[feature_cols].values, axis=1)
 
-    
+
     
     # Quantile features:
     df[f'{label_prefix}_quantile_5'] = df[feature_cols].quantile(q=0.05, axis=1)

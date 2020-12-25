@@ -5,6 +5,7 @@ def generate_date_features(df: pd.DataFrame, datetime_col: str) -> pd.DataFrame:
     """
     Generates date and time features from a datetime column in a dataframe
 
+    Args:
     - df: Input Dataframe
     - datetime_col: name of datetime column to generate features from
 
@@ -26,6 +27,7 @@ def agg_date_features(df: pd.DataFrame, datetime_col: str, aggs_dict: dict,
     Generates date and time features from a datetime column in a dataframe
     and aggregate based on date and time columns
 
+    Args:
     - df: Input Dataframe
     - datetime_col: name of datetime column to generate features from
     - aggs_dict: dict containing the date/time label -> function to aggregate 

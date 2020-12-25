@@ -8,6 +8,7 @@ def generate_polynomial_feats(df: pd.DataFrame, feat_cols: List[str],
     """
     Generates date and time features from a datetime column in a dataframe
 
+    Args:
     - df: Input Dataframe
     - feat_cols: names of numerical columns to generate poly features from
     - degree: degree of polynomial feats to be generated

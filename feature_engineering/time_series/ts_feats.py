@@ -7,6 +7,7 @@ def generate_ts_signals(x: Union[List[float], np.array, pd.Series]) -> dict:
     """
     Generates time series features from a time series array
 
+    Args:
     - x: Input array/series
 
     Returns:

@@ -9,6 +9,7 @@ def precision_at_k(y_true: Union[List[float], np.array, pd.Series],
     """
     Calculates precision for top-k predictions, divided by k
 
+    Args:
     - y_true: Input series/array with true labels
     - y_pred: Input series/array with predicted labels 
 
@@ -36,6 +37,7 @@ def average_precision_at_k(y_true: Union[List[float], np.array, pd.Series],
     """
     Calculates average precision for top-k predictions, divided by k
 
+    Args:
     - y_true: Input series/array with true labels
     - y_pred: Input series/array with predicted labels 
             (needs to be sorted in desc order, according to prob)
@@ -60,6 +62,7 @@ def mapk(y_true: Union[List[float], np.array, pd.Series],
     """
     Calculates mean average precision for top-k predictions, divided by k
 
+    Args:
     - y_true: Input series/array with true labels
     - y_pred: Input series/array with predicted labels 
             (needs to be sorted in desc order, according to prob)
