@@ -1,16 +1,16 @@
 import pandas as pd
 import numpy as np
-from typing import Union
+from typing import Union, List
 
 
-def precision_at_k(y_true: Union[list, np.array, pd.Series], 
-                   y_pred: Union[list, np.array, pd.Series],
+def precision_at_k(y_true: Union[List[float], np.array, pd.Series], 
+                   y_pred: Union[List[float], np.array, pd.Series],
                    k: int) -> float:
     """
     Calculates precision for top-k predictions, divided by k
 
-    y_true: Input series/array with true labels
-    y_pred: Input series/array with predicted labels 
+    - y_true: Input series/array with true labels
+    - y_pred: Input series/array with predicted labels 
 
     Returns:
         precision at given value k
@@ -30,14 +30,14 @@ def precision_at_k(y_true: Union[list, np.array, pd.Series],
     return len(common_values)/len(y_pred)
 
 
-def average_precision_at_k(y_true: Union[list, np.array, pd.Series], 
-                           y_pred: Union[list, np.array, pd.Series],
+def average_precision_at_k(y_true: Union[List[float], np.array, pd.Series], 
+                           y_pred: Union[List[float], np.array, pd.Series],
                            k: int) -> float:
     """
     Calculates average precision for top-k predictions, divided by k
 
-    y_true: Input series/array with true labels
-    y_pred: Input series/array with predicted labels 
+    - y_true: Input series/array with true labels
+    - y_pred: Input series/array with predicted labels 
             (needs to be sorted in desc order, according to prob)
 
     Returns:
@@ -54,14 +54,14 @@ def average_precision_at_k(y_true: Union[list, np.array, pd.Series],
     return sum(pk_values) / len(pk_values)
     
 
-def mapk(y_true: Union[list, np.array, pd.Series], 
-         y_pred: Union[list, np.array, pd.Series],
+def mapk(y_true: Union[List[float], np.array, pd.Series], 
+         y_pred: Union[List[float], np.array, pd.Series],
          k: int) -> float:
     """
     Calculates mean average precision for top-k predictions, divided by k
 
-    y_true: Input series/array with true labels
-    y_pred: Input series/array with predicted labels 
+    - y_true: Input series/array with true labels
+    - y_pred: Input series/array with predicted labels 
             (needs to be sorted in desc order, according to prob)
 
     Returns:
