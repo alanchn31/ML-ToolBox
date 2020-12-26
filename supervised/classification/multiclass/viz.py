@@ -8,8 +8,8 @@ from typing import Union, Tuple
 
 def plot_confusion_matrix(y_true: Union[list, np.array, pd.Series], 
                           y_pred: Union[list, np.array, pd.Series],
-                          figsize=(10.0, 10.0): Tuple[float, float],
-                          fontsize=20: int):
+                          figsize: Tuple[float, float] = (10.0, 10.0),
+                          fontsize: int = 20):
     """
     Plots confusion matrix as heatmap for a classification problem
 

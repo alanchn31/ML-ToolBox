@@ -4,7 +4,7 @@ from typing import List
 
 
 def generate_polynomial_feats(df: pd.DataFrame, feat_cols: List[str], 
-                             degree=2: int) -> pd.DataFrame:
+                             degree: int = 2) -> pd.DataFrame:
     """
     Generates date and time features from a datetime column in a dataframe
 

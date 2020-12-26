@@ -4,7 +4,7 @@ from typing import List
 
 
 def generate_stats_features(df: pd.DataFrame, feature_cols: List[str],
-                            label_prefix="feat": str):
+                            label_prefix: str = "feat"):
     """
     Generates date and time features from a datetime column in a dataframe
 

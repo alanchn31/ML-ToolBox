@@ -2,7 +2,7 @@ import pandas as pd
 
 
 def impute_rare_category(df: pd.DataFrame, cat_col: str, threshold: int,
-                         rare_label="RARE") -> pd.DataFrame:
+                         rare_label: str = "RARE") -> pd.DataFrame:
     """
     Replace categorical label of a column with "Rare", if its count 
     is less than a threshold. Deals with rare or unknown categories

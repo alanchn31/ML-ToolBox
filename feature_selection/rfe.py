@@ -3,7 +3,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.feature_selection import RFE
 
 
-def rfe(X: np.array, y: np.array, n_features_to_select=3: int):
+def rfe(X: np.array, y: np.array, n_features_to_select: int = 3):
     """
     Performs recursive feature elimination
 

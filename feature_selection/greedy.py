@@ -34,7 +34,7 @@ class GreedyFeatureSelection:
 
     def evaluate_oof_score(self, df: pd.DataFrame, 
                            target_col: str,
-                           nfolds=5: int) -> float:
+                           nfolds: int = 5) -> float:
         """
         Evaluates model on data and returns OOF AUC
 
@@ -65,7 +65,7 @@ class GreedyFeatureSelection:
 
 
     def _feature_selection(self, df: pd.DataFrame, 
-                           target_col: str, nfolds=-1: int):
+                           target_col: str, nfolds: int = -1):
         """
         Selects feature based on greedy approach, using AUC
 
@@ -114,7 +114,7 @@ class GreedyFeatureSelection:
             
 
     def __call__(self, df: pd.DataFrame, 
-                 target_col: str, nfolds=-1: int):
+                 target_col: str, nfolds: int = -1):
         """
         Call function will call the class on a set of arguments
 

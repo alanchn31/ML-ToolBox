@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.model_selection import StratifiedKFold
 
 
-def create_stratified_k_folds(df: pd.Dataframe, target_col="target": str) -> pd.Dataframe:
+def create_stratified_k_folds(df: pd.Dataframe, target_col: str = "target") -> pd.Dataframe:
     """
     Creates stratified Kfolds for any regression problem
 

@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.feature_selection import VarianceThreshold
 
-def var_thres(df: pd.DataFrame, threshold=0.1: float) -> pd.DataFrame:
+def var_thres(df: pd.DataFrame, threshold: float = 0.1) -> pd.DataFrame:
     """
     Remove columns with variance less than 0.1
 

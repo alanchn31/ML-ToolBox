@@ -5,7 +5,7 @@ from sklearn import preprocessing
 from typing import List
 
 def mean_target_encoding(data: pd.DataFrame, feature_cols: List[str], 
-                         target_col: str, nfolds=5: int) -> pd.DataFrame:
+                         target_col: str, nfolds: int = 5) -> pd.DataFrame:
     """
     Replace mean target encoding of categorical columns, with respect to a target column
 

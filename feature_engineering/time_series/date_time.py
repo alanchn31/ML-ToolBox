@@ -22,7 +22,7 @@ def generate_date_features(df: pd.DataFrame, datetime_col: str) -> pd.DataFrame:
 
 
 def agg_date_features(df: pd.DataFrame, datetime_col: str, aggs_dict: dict,
-                      id_col="": str) -> pd.DataFrame:
+                      id_col: str = "") -> pd.DataFrame:
     """
     Generates date and time features from a datetime column in a dataframe
     and aggregate based on date and time columns
