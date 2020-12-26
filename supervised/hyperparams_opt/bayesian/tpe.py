@@ -1,11 +1,11 @@
 import numpy as np
 from functools import partial
 from sklearn import ensemble, metrics, model_selection
-from skopt import gp_minimize, space
+from hyperopt import hp, fmin, tpe, Trials
 from typing import List
 
 
-def _optimize(params: dict, param_names: List[str], 
+def _optimize(params: dict, 
               x: np.array, y: np.array,
               model_name: str = "RandomForestClassifier") -> float:
     """
@@ -14,8 +14,7 @@ def _optimize(params: dict, param_names: List[str],
     by setting the chosen params and runs cross-validation.
     
     Args:
-    - params: list of params from gp_minimize
-    - param_names: list of param_names. Order is important
+    - params: dict of params from hyperopt
     - x: training_data
     - y: labels/targets
     - model_name: name of model to carry out hyperparam opt
@@ -24,7 +23,6 @@ def _optimize(params: dict, param_names: List[str],
     - Negative accuracy after 5 folds
     """
 
-    params = dict(zip(param_names, params))
     # Hardcode to search for model under sklearn.ensemble
     _model = getattr(ensemble, model_name)
     model = _model(**params)
@@ -49,9 +47,8 @@ def _optimize(params: dict, param_names: List[str],
     return -1 * np.mean(accuracies)
 
 
-def skopt_optimize(param_space: List, param_names: List[str], 
-                   X: np.array, y: np.array, 
-                   model_name: str = "RandomForestClassifier") -> dict:
+def hyopt_tpe_optimize(param_space: dict, X: np.array, y: np.array, 
+                       model_name: str = "RandomForestClassifier") -> dict:
     """
     Defines the optimization function using param_space &
     param_names. Next, call gp_minimize for bayesian optimization
@@ -59,40 +56,33 @@ def skopt_optimize(param_space: List, param_names: List[str],
     
     Args:
     - param_space: hyperparam space to search
-      eg: [space.Integer(3, 15, name="max_depth"),
-           space.Integer(100, 1500, name="n_estimators"),
-           space.Categorical(["gini", "entropy"], name="criterion"),
-           space.Real(0.01, 1, prior="uniform", name="max_features")]
-    - param_names: list of param_names. Order is important
-      eg: ["max_depth", "n_estimators", "criterion", "max_features"]
+      eg: {
+          "max_depth": scope.int(hp.quniform("max_depth", 1, 15, 1)),
+          "n_estimators": scope.int(hp.quniform("n_estimators", 100, 1500, 1)),
+          "criterion": hp.choice("criterion", ["gini", "entropy"]),
+          "max_features": hp.uniform("max_features", 0, 1)
+      }
     - X: training_data
     - y: labels/targets
     - model_name: name of model to carry out hyperparam opt
     
 
     Returns:
-    - best_params: dict of best params and result
+    - hopt: dict of best params and result
     """
     optimization_function = partial(
         _optimize,
-        param_names=param_names,
         x=X,
         y=y
     )
 
-    result = gp_minimize(
-        optimization_function,
-        dimensions=param_space,
-        n_calls=15,
-        n_random_starts=10,
-        verbose=10
-    )
+    trials = Trials()
 
-    best_params = dict(
-        zip(
-            param_names,
-            result.x
-        )
+    hopt = fmin(
+        fn=optimization_function,
+        space=param_space,
+        algo=tpe.suggest,
+        max_evals=15,
+        trials=trials
     )
-
-    return best_params
+    return hopt
